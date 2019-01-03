@@ -17,6 +17,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".animator.AnimatorActivity"/>
+        <activity android:name=".canvas.CanvasActivity"/>
     </application>
 
 </manifest>

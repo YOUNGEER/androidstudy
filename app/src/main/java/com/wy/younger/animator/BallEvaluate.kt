@@ -26,6 +26,7 @@ class BallEvaluate : TypeEvaluator<Ball> {
 
     }
 
+    //参照ofargb的源码实现的方法
     fun evaluateColor(fraction: Float, startValue: Any, endValue: Any): Int {
         val startInt = startValue as Int
         var startA: Float = ((startInt.shr(24)) and 0xff) / 255.0f
