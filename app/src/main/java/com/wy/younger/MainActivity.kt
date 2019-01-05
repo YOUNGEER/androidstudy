@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.wy.younger.animator.AnimatorActivity
 import com.wy.younger.canvas.CanvasActivity
+import com.wy.younger.paint.PaintActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -13,6 +14,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        tv_paint.setOnClickListener {
+            startActivity(Intent(this, PaintActivity::class.java))
+        }
 
         tv_animator.setOnClickListener {
             startActivity(Intent(this, AnimatorActivity::class.java))
