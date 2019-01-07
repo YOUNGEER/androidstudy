@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity
 import com.wy.younger.animator.AnimatorActivity
 import com.wy.younger.canvas.CanvasActivity
 import com.wy.younger.paint.PaintActivity
+import com.wy.younger.path.PathActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -20,6 +21,9 @@ class MainActivity : AppCompatActivity() {
 
         tv_animator.setOnClickListener {
             startActivity(Intent(this, AnimatorActivity::class.java))
+        }
+        tv_path.setOnClickListener {
+            startActivity(Intent(this, PathActivity::class.java))
         }
 
         tv_canvas.setOnClickListener {

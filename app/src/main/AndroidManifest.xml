@@ -19,6 +19,7 @@
         <activity android:name=".animator.AnimatorActivity"/>
         <activity android:name=".canvas.CanvasActivity"/>
         <activity android:name=".paint.PaintActivity"/>
+        <activity android:name=".path.PathActivity"/>
     </application>
 
 </manifest>
