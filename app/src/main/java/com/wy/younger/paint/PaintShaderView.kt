@@ -117,7 +117,7 @@ class PaintShaderView : View {
         Log.i("gfdsfdsfsdfa", bitmapWidth.toString() + "      " + bitmapHeight)
 
 //        canvas?.drawCircle(bitmapWidth/2, bitmapHeight/2, 60f, paint)
-        canvas?.drawRect(Rect(0, 0, 600, 600), paint)
+        canvas?.drawRect(Rect(0, 0, 1000, 600), paint)
 
 
     }

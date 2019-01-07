@@ -51,6 +51,15 @@ class PaintView : View {
 
         //9.paint?.colorFilter 颜色过滤器
 
+        //10.paint?.xFermode
+
+
+//        paint?.setPathEffect()   //11.路径样式
+
+//        paint?.setShadowLayer(10f, 0f, 0f, Color.RED)//12.设置的是在绘制层下方的附加效果。
+
+//        paint?.maskFilter     //13.设置的是在绘制层上方的附加效果。
+
 
     }
 }
