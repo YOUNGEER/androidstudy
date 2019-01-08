@@ -16,14 +16,13 @@ class PathActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tablayout)
 
-        datas.add(Model(R.layout.paint_layout, "paintLayout"))
-        datas.add(Model(R.layout.paint_porterduff_mode, "porterduffMode"))
-        datas.add(Model(R.layout.paint_colorfilter, "colorfilter"))
-        datas.add(Model(R.layout.paint_xfermode, "xfermode"))
-        datas.add(Model(R.layout.paint_stroke, "stroke"))
-        datas.add(Model(R.layout.paint_patheffect, "patheffect"))
-        datas.add(Model(R.layout.paint_maskfilter, "maskfilter"))
-        datas.add(Model(R.layout.paint_text, "painttext"))
+        datas.add(Model(R.layout.path_polygon, "polygon"))
+        datas.add(Model(R.layout.path_direction, "direction"))
+        datas.add(Model(R.layout.path_measure, "measure"))
+        datas.add(Model(R.layout.path_bezier, "bezier"))
+        datas.add(Model(R.layout.path_bezierquad, "bezierquad"))
+        datas.add(Model(R.layout.path_beziercubic, "beziercubic"))
+        datas.add(Model(R.layout.path_clock, "clock"))
 
         viewpager.adapter = object : FragmentPagerAdapter(supportFragmentManager) {
             override fun getItem(p0: Int): Fragment {
