@@ -207,7 +207,7 @@ class PaintText : View {
         paint?.getTextBounds("wy is learning paint text", 0, 20, r)//计算字符占用的范围，结果在r中
         canvas?.drawRect(r, paint)
         paint?.measureText("wy is learning paint text")//计算字符串的宽度
-        paint?.getTextWidths("wy is learning paint text", floatArrayOf())//计算每个字符的宽度，结果在数组中
+//        paint?.getTextWidths("wy is learning paint text", floatArrayOf())//计算每个字符的宽度，结果在数组中
 
 
         canvas?.restore()

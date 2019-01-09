@@ -111,6 +111,7 @@ class CanvasDrawView : View {
         path.lineTo(600f, 550f)
         path.close()//与最初的点进行连接
         canvas.drawPath(path, paint)
+
     }
 
 

@@ -6,11 +6,8 @@ import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
 import android.os.Build
-import android.renderscript.Sampler
 import android.support.annotation.RequiresApi
 import android.util.AttributeSet
-import android.util.Log
-import android.view.MotionEvent
 import android.view.View
 
 /**
@@ -26,6 +23,7 @@ class AnimatorView2 : View {
     var mRadius: Float = 100f
 
     constructor(context: Context) : super(context) {
+
     }
 
     constructor(context: Context, attrs: AttributeSet?) : super(context, attrs) {

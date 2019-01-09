@@ -62,6 +62,7 @@ class PaintXfermode : View {
 
         super.onDraw(canvas)
 
+        //新建一个图层，可以防止底部图层对合成的影响
         val saved: Int? = canvas?.saveLayer(null, null, Canvas.ALL_SAVE_FLAG)
 
         paint?.color = Color.RED
@@ -70,8 +71,6 @@ class PaintXfermode : View {
 
         bitmap = Bitmap.createScaledBitmap(bitmap, 600, 600, true)//SRC
         canvas?.drawBitmap(bitmap, 0f, 0f, paint)
-
-
 
         paint?.xfermode = xfermode
         canvas?.drawBitmap(bitmap, 0f, 600f, paint)
