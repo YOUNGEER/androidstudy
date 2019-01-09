@@ -6,7 +6,6 @@ import android.graphics.*
 import android.util.AttributeSet
 import android.view.View
 import android.view.animation.LinearInterpolator
-import com.wy.younger.utils.ColUtils
 
 /**
  *@package:com.wy.younger.animator.movingparticles
@@ -24,15 +23,10 @@ class RunBallView3 : View {
     var paint_bg: Paint? = null
     var animator: ValueAnimator? = null
 
-    var balls: ArrayList<MoveBall>? = null
-    var ball: MoveBall? = null
 
-    val defaultR: Float = 100f//默认小球半径
-    val defaultColor: Int = Color.BLUE//默认小球颜色
-    val defaultVX: Float = 10f//默认小球x方向速度
-    val defaultF: Float = 0.95f//碰撞损耗
-    val defaultVY: Float = 0f//默认小球y方向速度
-    val defaultAY: Float = 0.5f//默认小球加速度
+    var ball1: MoveBall? = null
+    var ball2: MoveBall? = null
+
 
     val mMaxX: Float = 900f//X最大值
     val mMinX: Float = 100f//X最小值
@@ -59,11 +53,8 @@ class RunBallView3 : View {
 
     fun initView(context: Context) {
 
-        ball = initBall()
-        ball?.x = 200f
-        ball?.y = 200f
-        balls = ArrayList()
-        balls?.add(ball!!)
+        ball1 = initBall1()
+        ball2 = initBall2()
 
         path = Path()
         paint = Paint(Paint.ANTI_ALIAS_FLAG)
@@ -74,15 +65,9 @@ class RunBallView3 : View {
         animator = ValueAnimator.ofFloat(0f, 1f)
         animator?.interpolator = LinearInterpolator()
         animator?.addUpdateListener {
-
-            if (balls?.size == 0) {
-                ball = initBall()
-                ball?.x = 200f
-                ball?.y = 200f
-                balls?.add(ball!!)
-            }
-
-            updateBalls()
+            towBall()
+            updateBalls(ball1)
+            updateBalls(ball2)
             invalidate()
         }
 
@@ -97,79 +82,77 @@ class RunBallView3 : View {
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
         canvas?.drawRect(RectF(mMinX, mMinY, mMaxX, mMaxY), paint_bg)
-        balls?.forEach {
-            paint?.color = it.color
-            canvas?.drawCircle(it.x, it.y, it.r, paint)
-        }
+        paint?.color = ball1!!.color
+        canvas?.drawCircle(ball1!!.x, ball1!!.y, ball1!!.r, paint)
+
+        paint?.color = ball2!!.color
+        canvas?.drawCircle(ball2!!.x, ball2!!.y, ball2!!.r, paint)
+
     }
 
-    fun updateBalls() {
-
-
-        val copyBalls = balls?.clone() as ArrayList<MoveBall>
-        copyBalls?.forEach {
-            if (it.r < 1) {
-                balls?.remove(it)
-                return@forEach
-            }
-
+    fun updateBalls(ball: MoveBall?) {
+        ball?.let {
             //位移=起始点+速度*时间(默认1)
             //速度=起始速度+加速度*时间(默认1)
             it.x += it.vX
             it.y += it.vY
-            it.vX += it.aX
-            it.vY += it.aY
-
             if (it.x > mMaxX) {
-                val newBall = it.clone() as MoveBall//新建一个ball同等信息的球
-                newBall.r = (newBall.r * 0.9).toFloat()
-                newBall.vX = -newBall.vX
-                newBall.vY = -newBall.vY
-                balls?.add(newBall)
-
                 it.x = mMaxX
-                it.vX = -it.vX * defaultF
-                it.color = ColUtils.randomRGB()//更改颜色
-                it.r = it.r / 2
+                it.vX = -it.vX
             }
-
             if (it.x < mMinX) {
-                val newBall = it.clone() as MoveBall
-                newBall.r = newBall.r / 2
-                newBall.vX = -newBall.vX
-                newBall.vY = -newBall.vY
-                balls?.add(newBall)
-
                 it.x = mMinX
-                it.vX = -it.vX * defaultF
-                it.color = ColUtils.randomRGB()
-                it.r = it.r / 2
+                it.vX = -it.vX
             }
             if (it.y > mMaxY) {
-
                 it.y = mMaxY
-                it.vY = -it.vY * defaultF
-                it.color = ColUtils.randomRGB()
+                it.vY = -it.vY
             }
             if (it.y < mMinY) {
                 it.y = mMinY
-                it.vY = -it.vY * defaultF
-                it.color = ColUtils.randomRGB()
+                it.vY = -it.vY
             }
 
         }
     }
 
+    fun towBall() {
+        val squars = Math.sqrt(
+            (Math.abs(ball1!!.x) - Math.abs(ball2!!.x)).toDouble()
+                    * (Math.abs(ball1!!.x) - Math.abs(ball2!!.x)).toDouble()
+        ) + Math.sqrt(
+            (Math.abs(ball1!!.y) - Math.abs(ball2!!.y)).toDouble()
+                    * (Math.abs(ball1!!.y) - Math.abs(ball2!!.y)).toDouble()
+        )
+        if (squars <= 160) {
+            ball1!!.vX = -ball1!!.vX
+            ball1!!.vY = -ball1!!.vY
+            ball2!!.vX = -ball2!!.vX
+            ball2!!.vY = -ball2!!.vY
 
-    private fun initBall(): MoveBall {
+        }
+    }
+
+
+    private fun initBall1(): MoveBall {
         val mBall = MoveBall()
-        mBall.color = defaultColor
-        mBall.r = defaultR
-        mBall.vX = defaultVX
-        mBall.vY = defaultVY
-        mBall.aY = defaultAY
+        mBall.color = Color.BLUE
+        mBall.r = 50f
+        mBall.vX = 11f
+        mBall.vY = 7f
         mBall.x = 0f
         mBall.y = 0f
+        return mBall
+    }
+
+    private fun initBall2(): MoveBall {
+        val mBall = MoveBall()
+        mBall.color = Color.RED
+        mBall.r = 50f
+        mBall.vX = 9f
+        mBall.vY = 5f
+        mBall.x = 600f
+        mBall.y = 430f
         return mBall
     }
 

@@ -20,6 +20,7 @@ class AnimatorActivity : AppCompatActivity() {
         datas.add(Model(R.layout.animator_valueanimator2, "AnimatorColor"))
         datas.add(Model(R.layout.animator_ballrun, "ballrun1"))
         datas.add(Model(R.layout.animator_ballrun2, "ballrun2"))
+        datas.add(Model(R.layout.animator_ballrun3, "ballrun3"))
 
 
         viewpager.adapter = object : FragmentPagerAdapter(supportFragmentManager) {
