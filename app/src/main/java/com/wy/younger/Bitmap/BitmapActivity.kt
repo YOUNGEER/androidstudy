@@ -16,6 +16,7 @@ class BitmapActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tablayout)
 
+
         datas.add(Model(R.layout.bitmap_color, "color"))
         datas.add(Model(R.layout.bitmap_color_split, "color_split"))
 
