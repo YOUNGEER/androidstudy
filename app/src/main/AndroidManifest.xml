@@ -20,6 +20,10 @@
         <activity android:name=".canvas.CanvasActivity"/>
         <activity android:name=".paint.PaintActivity"/>
         <activity android:name=".path.PathActivity"/>
+        <activity android:name=".Bitmap.BitmapActivity"/>
+        <activity android:name=".MD.ToolbarTestActivity"
+                  android:theme="@style/TranslucentTheme"
+        />
     </application>
 
 </manifest>

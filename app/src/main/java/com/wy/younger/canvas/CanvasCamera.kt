@@ -1,12 +1,14 @@
 package com.wy.younger.canvas
 
+import android.animation.Animator
+import android.animation.ObjectAnimator
 import android.content.Context
 import android.graphics.*
 import android.util.AttributeSet
-import android.util.DisplayMetrics
 import android.view.View
-import android.view.WindowManager
 import com.wy.younger.R
+import com.wy.younger.ScreenHeight
+import com.wy.younger.ScreenWidht
 
 /**
  *@package:com.wy.younger.canvas
@@ -21,9 +23,15 @@ import com.wy.younger.R
  */
 class CanvasCamera : View {
 
-    var mGridPaint: Paint? = null//网格画笔
-    var mWinSize: Point? = null//屏幕尺寸
-    var mCoo: Point? = null//坐标系原点
+
+    var camera: Camera? = null
+    val centerX: Float = context.ScreenWidht() / 2.toFloat()
+    val centerY: Float = context.ScreenHeight() / 2.toFloat()
+
+    var degreeY: Float = 0f
+    var rotate: Float = 0f
+    var bitmap: Bitmap? = null
+    var paint: Paint? = null
 
 
     constructor(context: Context) : super(context) {
@@ -44,239 +52,131 @@ class CanvasCamera : View {
     }
 
     fun initView(context: Context) {
-        mWinSize = Point()
-        loadWinSize(context, mWinSize)
-        mCoo = Point(300, 300)
-        mGridPaint = Paint(Paint.ANTI_ALIAS_FLAG)
-        invalidate()
-    }
+        camera = Camera()
 
+        val displayMetrics = resources.displayMetrics
+        val newZ = -displayMetrics.density * 6
+        camera?.setLocation(0f, 0f, newZ)//使用 setLocation() 方法来把相机往后移动
+
+        paint = Paint(Paint.ANTI_ALIAS_FLAG)
+
+        bitmap = BitmapFactory.decodeResource(resources, R.drawable.pic1)
+        bitmap = Bitmap.createScaledBitmap(bitmap!!, 600, 600, true)
+
+        val valueAnimator3 = ObjectAnimator.ofFloat(-45f, 0f)
+        valueAnimator3.addUpdateListener {
+            degreeY = it.animatedValue as Float
+            invalidate()
+        }
+        valueAnimator3.duration = 2000
+
+
+        val valueAnimator2 = ObjectAnimator.ofFloat(0f, -360f)
+        valueAnimator2.addUpdateListener {
+            rotate = it.animatedValue as Float
+            invalidate()
+        }
+        valueAnimator2.duration = 1000
+        valueAnimator2?.addListener(object : Animator.AnimatorListener {
+            override fun onAnimationRepeat(animation: Animator?) {
+
+            }
+
+            override fun onAnimationCancel(animation: Animator?) {
+
+            }
+
+            override fun onAnimationStart(animation: Animator?) {
+
+            }
+
+            override fun onAnimationEnd(animation: Animator?) {
+                valueAnimator3.start()
+            }
+        })
+
+
+        val valueAnimator = ObjectAnimator.ofFloat(0f, -45f)
+        valueAnimator.addUpdateListener {
+            degreeY = it.animatedValue as Float
+            invalidate()
+        }
+        valueAnimator.duration = 2000
+        valueAnimator.start()
+
+        valueAnimator?.addListener(object : Animator.AnimatorListener {
+            override fun onAnimationRepeat(animation: Animator?) {
+
+            }
+
+            override fun onAnimationCancel(animation: Animator?) {
+
+            }
+
+            override fun onAnimationStart(animation: Animator?) {
+
+            }
+
+            override fun onAnimationEnd(animation: Animator?) {
+                valueAnimator2.start()
+            }
+        })
+
+
+    }
 
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
 
+        /**
+         * 整体实现思路：开始分成左右两部分，当右边出现折叠效果后，再旋转canvas，使得折叠部分效果沿着canvas的旋转而旋转，最后再回复
+         */
+        val x = centerX - bitmap!!.width / 2
+        val y = centerY - bitmap!!.height / 2
+
+        //1. canvas.save  canvas.restore   camera.save    camera.restore保存状态，图层合成
         canvas?.save()
-        val matrix = Matrix()
-        matrix.postRotate(45f)
-//        matrix.postRotate()
-//        matrix.postScale()
-//        matrix.postSkew() 和canvas的变换类似
-//        drawGrid(canvas, mWinSize, mGridPaint)
-        canvas?.concat(matrix)
-//        canvas?.matrix=matrix,兼容性不好
-        drawCoo(canvas!!, mCoo!!, mWinSize!!, mGridPaint!!)
-        canvas.restore()
+        camera?.save()
 
+        canvas?.translate(centerX, centerY)//2.将canvas的左上角的坐标移动到屏幕中心
+        //3.camera沿着y轴旋转，此时canvas会有折叠效果
+        //camera的rotate是按照canvas的正常坐标系来的，如果坐标系进行了旋转，camera此时的旋转会和奇怪
+        camera?.rotateY(degreeY)
 
-        //使用 Matrix 来做自定义变换
+        //10.degreeY动画完了后，执行canvas旋转动画，此时折叠的效果会随着canvas的旋转而旋转
+        // 注意，千万不要把旋转放在了坐标系移动的前面去了
+        canvas?.rotate(rotate)
+        camera?.applyToCanvas(canvas)//4.将camera的效果应用到canvas上
+
+        camera?.restore()
+        //5.由于camera?.rotateY会旋转整个canvas，所以为了实现开始只有右半部分有折叠效果，所以此时可以clip右边的区域
+        canvas?.clipRect(RectF(0f, -centerY, centerX, centerY))
+        canvas?.rotate(-rotate)
+
+        //6.再把canvas的坐标移到左上角，方便下次移动，复用代码
+        canvas?.translate(-centerX, -centerY)
+        //7.绘制图片
+        canvas?.drawBitmap(bitmap!!, x, y, paint)
+        canvas?.restore()
+
 
         canvas?.save()
-//        val matrix2 = Matrix()
-        matrix.reset()
-        //left top  right top  left bottom  right bottom
-        //left top  left bottom  right bottom  right top
+        //8.移动坐标原点
+        canvas?.translate(centerX, centerY)
 
-        //坐标点只要是按照一定正序或者逆序即可
+        //11.degreeY动画完了后，执行canvas旋转动画，此时折叠的效果会随着canvas的旋转而旋转
+        // 注意，千万不要把旋转放在了坐标系移动的前面去了
+        canvas?.rotate(rotate)
+        //9.剪切左半部分
+        canvas?.clipRect(RectF(-centerX, -centerY, 0f, centerY))
+        canvas?.rotate(-rotate)
 
-        //src和dst两个数组控制4个顶点的坐标，
-        // srcIndex,dstIndex分别是src和dst的第一个值的角标，
-        // pointCount是4个顶点中要使用的个数，最大为4,0表示不进行操作变换
-        matrix.setPolyToPoly(
-            floatArrayOf(0f, 0f, 0f, 100f, 100f, 100f, 100f, 0f),
-            0,
-            floatArrayOf(20f, 0f, 0f, 100f, 100f, 100f, 80f, 0f),
-            0,
-            4
-        )
-        canvas?.concat(matrix)
-//        canvas?.matrix=matrix,兼容性不好
-        val bitmap = BitmapFactory.decodeResource(resources, R.drawable.wx)
-        canvas.drawBitmap(bitmap, null, Rect(0, 0, 100, 100), mGridPaint)
+        canvas?.translate(-centerX, -centerY)
 
-        canvas.restore()
+        canvas?.drawBitmap(bitmap!!, x, y, paint)
+        canvas?.restore()
 
     }
 
 
-    /**
-     * 获取屏幕尺寸的大小，赋值给winSize的坐标点
-     */
-    fun loadWinSize(context: Context, winSize: Point?) {
-        val wm = context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
-        val outMetrics = DisplayMetrics()
-
-        wm?.defaultDisplay.getMetrics(outMetrics)
-
-        winSize?.x = outMetrics.widthPixels
-        winSize?.y = outMetrics.heightPixels
-    }
-
-
-    fun gridPath(step: Int, winSize: Point?): Path {
-
-        val path = Path()
-        for (index in 0..(winSize!!.y / step + 1).toInt()) {
-            path.moveTo(0f, step * index.toFloat())
-            path.lineTo(winSize!!.x.toFloat(), step * index.toFloat())
-
-        }
-        for (index in 0..(winSize!!.y / step + 1).toInt()) {
-            path.moveTo(step * index.toFloat(), 0f)
-            path.lineTo(step * index.toFloat(), winSize!!.y.toFloat())
-        }
-
-        return path
-
-    }
-
-
-    fun drawGrid(canvas: Canvas?, winSize: Point?, paint: Paint?) {
-        paint?.strokeWidth = 2f
-        paint?.color = Color.GRAY
-        paint?.style = Paint.Style.STROKE
-
-        paint?.pathEffect = DashPathEffect(floatArrayOf(10f, 5f), 0f)
-        canvas?.drawPath(gridPath(50, winSize), paint)
-
-    }
-
-    fun drawCoo(canvas: Canvas, coo: Point, winSize: Point, paint: Paint) {
-        paint.strokeWidth = 4f
-        paint.color = Color.BLACK
-        paint.style = Paint.Style.STROKE
-
-        //设置虚线效果的floatArrayOf(可见长度，不可见长度)，偏移量
-        paint.pathEffect = null
-
-        //绘制直线
-        canvas.drawPath(cooPath(coo, winSize), paint)
-
-
-        //左箭头
-        canvas.drawLine(
-            winSize.x.toFloat(), coo.y.toFloat()
-            , winSize.x.toFloat() - 40,
-            coo.y.toFloat() - 20, paint
-        )
-        canvas.drawLine(
-            winSize.x.toFloat(), coo.y.toFloat()
-            , winSize.x.toFloat() - 40,
-            coo.y.toFloat() + 20, paint
-        )
-
-        //下箭头
-        canvas.drawLine(
-            coo.x.toFloat(), winSize.y.toFloat()
-            , coo.x.toFloat() - 20,
-            winSize.y.toFloat() - 40, paint
-        )
-        canvas.drawLine(
-            coo.x.toFloat(), winSize.y.toFloat()
-            , coo.x.toFloat() + 20,
-            winSize.y.toFloat() - 40, paint
-        )
-
-        //为坐标系绘制文字
-        drawText4Coo(canvas, coo, winSize, paint)
-
-
-    }
-
-    /**
-     * 坐标系路径绘制
-     * @param coo:坐标原点
-     * @param winSize:屏幕右下点
-     */
-    fun cooPath(coo: Point, winSize: Point): Path {
-        val path = Path()
-        //x正半轴线
-//        path.moveTo(coo.x.toFloat(), coo.y.toFloat())
-//        path.lineTo(winSize.x.toFloat(), coo.y.toFloat())
-//        //x负半轴
-//        path.moveTo(coo.x.toFloat(), coo.y.toFloat())
-//        path.lineTo(coo.x.toFloat() - winSize.x, coo.y.toFloat())
-//
-//        //y正半轴线
-//        path.moveTo(coo.x.toFloat(), coo.y.toFloat())
-//        path.lineTo(coo.x.toFloat(), winSize.y.toFloat())
-//        //y负半轴
-//        path.moveTo(coo.x.toFloat(), coo.y.toFloat())
-//        path.lineTo(coo.x.toFloat(), coo.y.toFloat() - winSize.y.toFloat())
-
-        path.moveTo(winSize.x.toFloat(), coo.y.toFloat())
-        path.lineTo(0f, coo.y.toFloat())
-
-        path.moveTo(coo.x.toFloat(), winSize.y.toFloat())
-        path.lineTo(coo.x.toFloat(), 0f)
-
-        return path
-
-    }
-
-
-    fun drawText4Coo(canvas: Canvas, coo: Point, winSize: Point, paint: Paint) {
-        //绘制文字 x ,y
-        paint.textSize = 50f
-        canvas.drawText("x", winSize.x - 60.toFloat(), coo.y - 40.toFloat(), paint)
-        canvas.drawText("y", coo.x - 40.toFloat(), winSize.y - 60.toFloat(), paint)
-
-        //绘制坐标系刻度
-        paint.textSize = 25f
-
-        //x正轴文字
-        for (i in 1..(winSize.x - coo.x) / 50) {
-            paint.strokeWidth = 2f
-            canvas.drawText((100 * i).toString(), (coo.x - 20 + 100 * i).toFloat(), coo.y + 40.toFloat(), paint)
-            paint.strokeWidth = 5f
-            canvas.drawLine(
-                (coo.x + 100 * i).toFloat(),
-                coo.y.toFloat(),
-                (coo.x + 100 * i).toFloat(),
-                (coo.y - 10).toFloat(),
-                paint
-            )
-        }
-        //x负轴文字
-        for (i in 1..(coo.x / 50)) {
-            paint.strokeWidth = 2f
-            canvas.drawText((-100 * i).toString(), (coo.x - 20 - 100 * i).toFloat(), coo.y + 40.toFloat(), paint)
-            paint.strokeWidth = 5f
-            canvas.drawLine(
-                (coo.x - 100 * i).toFloat(),
-                coo.y.toFloat(),
-                (coo.x - 100 * i).toFloat(),
-                (coo.y - 10).toFloat(),
-                paint
-            )
-        }
-
-
-        //y正轴文字
-        for (i in 1..(winSize.y - coo.y) / 50) {
-            paint.strokeWidth = 2f
-            canvas.drawText((100 * i).toString(), (coo.x + 20).toFloat(), (coo.y + 10 + 100 * i).toFloat(), paint)
-            paint.strokeWidth = 5f
-            canvas.drawLine(
-                (coo.x).toFloat(),
-                (coo.y + 100 * i).toFloat(),
-                (coo.x + 10).toFloat(),
-                (coo.y + 100 * i).toFloat(),
-                paint
-            )
-        }
-        //y负轴文字
-        for (i in 1..(coo.y) / 50) {
-            paint.strokeWidth = 2f
-            canvas.drawText((-100 * i).toString(), (coo.x + 20).toFloat(), (coo.y + 10 - 100 * i).toFloat(), paint)
-            paint.strokeWidth = 5f
-            canvas.drawLine(
-                (coo.x).toFloat(),
-                (coo.y - 100 * i).toFloat(),
-                (coo.x + 10).toFloat(),
-                (coo.y - 100 * i).toFloat(),
-                paint
-            )
-        }
-
-    }
 }

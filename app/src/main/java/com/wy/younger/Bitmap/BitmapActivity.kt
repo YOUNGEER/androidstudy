@@ -1,4 +1,4 @@
-package com.wy.younger.canvas
+package com.wy.younger.Bitmap
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -8,7 +8,7 @@ import com.wy.younger.PageFragment
 import com.wy.younger.R
 import kotlinx.android.synthetic.main.activity_tablayout.*
 
-class CanvasActivity : AppCompatActivity() {
+class BitmapActivity : AppCompatActivity() {
 
     var datas = ArrayList<Model>()
 
@@ -16,12 +16,8 @@ class CanvasActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tablayout)
 
-        datas.add(Model(R.layout.canvas_drawview, "drawview"))
-        datas.add(Model(R.layout.canvas_clip, "clip"))
-        datas.add(Model(R.layout.canvas_translate, "translate"))
-        datas.add(Model(R.layout.canvas_matrix, "matrix"))
-        datas.add(Model(R.layout.canvas_camera, "camera"))
-        datas.add(Model(R.layout.canvas_flipboard, "flipboard"))
+        datas.add(Model(R.layout.bitmap_color, "color"))
+        datas.add(Model(R.layout.bitmap_color_split, "color_split"))
 
 
         viewpager.adapter = object : FragmentPagerAdapter(supportFragmentManager) {

@@ -69,6 +69,34 @@
                 app:rippleColor="@color/colorPrimary"
                 app:cornerRadius="4dp"
         />
+        <android.support.design.button.MaterialButton
+                android:id="@+id/tv_bitmap"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Bitmap"
+                android:gravity="center"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
+                android:textAppearance="?android:attr/textAppearanceLargeInverse"
+                app:rippleColor="@color/colorPrimary"
+                app:cornerRadius="4dp"
+        />
+        <android.support.design.button.MaterialButton
+                android:id="@+id/tv_MD_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="MD_toolbar"
+                android:gravity="center"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
+                android:textAppearance="?android:attr/textAppearanceLargeInverse"
+                app:rippleColor="@color/colorPrimary"
+                app:cornerRadius="4dp"
+        />
     </LinearLayout>
 
 

@@ -69,12 +69,15 @@ public class Practice14FlipboardView extends View {
 
         canvas.save();
 
-        camera.save();
-        camera.rotateX(degree);
+        camera.save(); // 保存 Camera 的状态
         canvas.translate(centerX, centerY);
-        camera.applyToCanvas(canvas);
+        camera.rotateX(degree);// 沿x轴 旋转 Camera 的三维空间
+
+        camera.applyToCanvas(canvas);// 把旋转投影到 Canvas
+        //如果你需要图形左右对称，需要配合上 Canvas.translate()，
+        // 在三维旋转之前把绘制内容的中心点移动到原点，即旋转的轴心，然后在三维旋转后再把投影移动回来：
         canvas.translate(-centerX, -centerY);
-        camera.restore();
+        camera.restore();// 恢复 Camera 的状态
 
         canvas.drawBitmap(bitmap, x, y, paint);
         canvas.restore();

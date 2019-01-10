@@ -3,6 +3,8 @@ package com.wy.younger
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import com.wy.younger.Bitmap.BitmapActivity
+import com.wy.younger.MD.ToolbarTestActivity
 import com.wy.younger.animator.AnimatorActivity
 import com.wy.younger.canvas.CanvasActivity
 import com.wy.younger.paint.PaintActivity
@@ -28,6 +30,12 @@ class MainActivity : AppCompatActivity() {
 
         tv_canvas.setOnClickListener {
             startActivity(Intent(this, CanvasActivity::class.java))
+        }
+        tv_bitmap.setOnClickListener {
+            startActivity(Intent(this, BitmapActivity::class.java))
+        }
+        tv_MD_toolbar.setOnClickListener {
+            startActivity(Intent(this, ToolbarTestActivity::class.java))
         }
     }
 }
