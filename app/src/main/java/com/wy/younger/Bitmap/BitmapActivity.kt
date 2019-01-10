@@ -20,6 +20,7 @@ class BitmapActivity : AppCompatActivity() {
         datas.add(Model(R.layout.bitmap_color_split, "color_split"))
 
 
+
         viewpager.adapter = object : FragmentPagerAdapter(supportFragmentManager) {
             override fun getItem(p0: Int): Fragment {
                 return PageFragment.newInstance(datas[p0].resorceLayout)
