@@ -40,7 +40,6 @@ class ActionMutilPoint : View {
 
             }
 
-
             MotionEvent.ACTION_DOWN -> {
 
             }
