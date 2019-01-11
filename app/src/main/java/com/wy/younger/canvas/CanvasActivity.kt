@@ -22,6 +22,10 @@ class CanvasActivity : AppCompatActivity() {
         datas.add(Model(R.layout.canvas_matrix, "matrix"))
         datas.add(Model(R.layout.canvas_camera, "camera"))
         datas.add(Model(R.layout.canvas_flipboard, "flipboard"))
+        datas.add(Model(R.layout.canvas_region, "region"))
+        datas.add(Model(R.layout.canvas_region_demo, "demo"))
+        datas.add(Model(R.layout.canvas_region_demo_2, "demo_2"))
+
 
 
         viewpager.adapter = object : FragmentPagerAdapter(supportFragmentManager) {
