@@ -25,6 +25,7 @@ public class StackDemo extends Stack<String> {
         return super.empty();
     }
 
+
     @Override
     public synchronized String peek() {
         return super.peek();
