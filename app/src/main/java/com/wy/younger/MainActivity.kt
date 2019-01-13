@@ -37,5 +37,6 @@ class MainActivity : AppCompatActivity() {
         tv_MD_toolbar.setOnClickListener {
             startActivity(Intent(this, ToolbarTestActivity::class.java))
         }
+
     }
 }
