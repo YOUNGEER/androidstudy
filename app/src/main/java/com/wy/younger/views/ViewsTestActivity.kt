@@ -23,6 +23,9 @@ class ViewsTestActivity : AppCompatActivity() {
         setContentView(R.layout.activity_tablayout)
 
         datas.add(Model(R.layout.views_mutilpoint_scale, "mutilpoint_scale"))
+        datas.add(Model(R.layout.views_measure1, "measure1"))
+        datas.add(Model(R.layout.views_measure2, "measure2"))
+        datas.add(Model(R.layout.views_measure3, "measure3"))
 
 
 

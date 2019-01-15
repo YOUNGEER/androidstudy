@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <com.wy.younger.views.FlowLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <android.support.design.button.MaterialButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="自定义view"
+                android:gravity="center"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
+                android:textAppearance="?android:attr/textAppearanceLargeInverse"
+                app:rippleColor="@color/colorPrimary"
+                app:cornerRadius="4dp"
+        />
+
+
+        <android.support.design.button.MaterialButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="自定义view111"
+                android:gravity="center"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
+                android:textAppearance="?android:attr/textAppearanceLargeInverse"
+                app:rippleColor="@color/colorPrimary"
+                app:cornerRadius="4dp"
+        />
+
+
+        <android.support.design.button.MaterialButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="自定义view22222222"
+                android:gravity="center"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
+                android:textAppearance="?android:attr/textAppearanceLargeInverse"
+                app:rippleColor="@color/colorPrimary"
+                app:cornerRadius="4dp"
+        />
+
+
+        <android.support.design.button.MaterialButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="自定义view"
+                android:gravity="center"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
+                android:textAppearance="?android:attr/textAppearanceLargeInverse"
+                app:rippleColor="@color/colorPrimary"
+                app:cornerRadius="4dp"
+        />
+
+
+        <android.support.design.button.MaterialButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="自定义view"
+                android:gravity="center"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
+                android:textAppearance="?android:attr/textAppearanceLargeInverse"
+                app:rippleColor="@color/colorPrimary"
+                app:cornerRadius="4dp"
+        />
+
+
+        <android.support.design.button.MaterialButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="自定义view44444444444"
+                android:gravity="center"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
+                android:textAppearance="?android:attr/textAppearanceLargeInverse"
+                app:rippleColor="@color/colorPrimary"
+                app:cornerRadius="4dp"
+        />
+
+
+        <android.support.design.button.MaterialButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="自定义view55"
+                android:gravity="center"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
+                android:textAppearance="?android:attr/textAppearanceLargeInverse"
+                app:rippleColor="@color/colorPrimary"
+                app:cornerRadius="4dp"
+        />
+
+
+    </com.wy.younger.views.FlowLayout>
+
+</RelativeLayout>
