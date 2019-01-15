@@ -24,6 +24,7 @@
         <activity android:name=".MD.ToolbarTestActivity"
                   android:theme="@style/TranslucentTheme"
         />
+        <activity android:name=".views.ViewsTestActivity"/>
     </application>
 
 </manifest>

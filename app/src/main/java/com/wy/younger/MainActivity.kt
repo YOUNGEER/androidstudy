@@ -9,6 +9,7 @@ import com.wy.younger.animator.AnimatorActivity
 import com.wy.younger.canvas.CanvasActivity
 import com.wy.younger.paint.PaintActivity
 import com.wy.younger.path.PathActivity
+import com.wy.younger.views.ViewsTestActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -36,6 +37,9 @@ class MainActivity : AppCompatActivity() {
         }
         tv_MD_toolbar.setOnClickListener {
             startActivity(Intent(this, ToolbarTestActivity::class.java))
+        }
+        tv_views.setOnClickListener {
+            startActivity(Intent(this, ViewsTestActivity::class.java))
         }
 
     }
