@@ -33,7 +33,7 @@ public class Computer {
         }
 
 
-        public Builder setColor(String color) {
+        public Builder setColor(int color) {
             this.color = color;
             return this;
         }
@@ -71,7 +71,7 @@ public class Computer {
                 weight = "360g";
             }
             if (TextUtils.isEmpty(String.valueOf(Color.RED))) {
-                color = "Color.RED";
+                color = Color.RED;
             }
 
             Computer computer = new Computer();

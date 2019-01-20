@@ -13,7 +13,7 @@ public class Ehan {
     private static Ehan instance1 = new Ehan();
 
     private static Ehan getInstance1() {
-        return instance1
+        return instance1;
     }
 
 
@@ -25,7 +25,7 @@ public class Ehan {
 
     private static Ehan getInstance2() {
         if (null == instance2) {
-            instance2 = new Ehan()
+            instance2 = new Ehan();
         }
         return instance2;
     }

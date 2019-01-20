@@ -16,10 +16,10 @@ public class InnerClass {
 
 
     public static class InnerClassHolder {
-        public static InnerClass innerClass = new InnerClass()
+        public static InnerClass innerClass = new InnerClass();
     }
 
     public static InnerClass getInstance() {
-        return InnerClassHolder.innerClass
+        return InnerClassHolder.innerClass;
     }
 }

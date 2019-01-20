@@ -13,7 +13,7 @@ public class LanHan {
 
     private static LanHan getInstance1() {
         if (null == instance1) {
-            instance1 = new LanHan()
+            instance1 = new LanHan();
         }
         return instance1;
     }
@@ -47,7 +47,7 @@ public class LanHan {
     private static LanHan getInstance3() {
         if (null == instance3) {
             synchronized (LanHan.class) {
-                instance3 = new LanHan()
+                instance3 = new LanHan();
             }
         }
         return instance3;
@@ -64,7 +64,7 @@ public class LanHan {
         if (null == instance4) {
             synchronized (LanHan.class) {
                 if (null == instance4) {
-                    instance4 = new LanHan()
+                    instance4 = new LanHan();
                 }
             }
         }
