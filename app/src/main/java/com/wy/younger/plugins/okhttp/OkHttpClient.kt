@@ -1,4 +1,4 @@
-package com.wy.younger.plugins.网络
+package com.wy.younger.plugins.okhttp
 
 /**
  *@package:com.wy.younger.第三方框架.网络
