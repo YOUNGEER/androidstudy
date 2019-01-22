@@ -1,11 +1,11 @@
 package com.wy.younger.plugins.rxjava;
 
+import com.wy.younger.plugins.rxjava.annotations.CheckReturnValue;
 import com.wy.younger.plugins.rxjava.annotations.NonNull;
+import com.wy.younger.plugins.rxjava.annotations.SchedulerSupport;
 import com.wy.younger.plugins.rxjava.internal.functions.ObjectHelper;
-import io.reactivex.annotations.CheckReturnValue;
-import io.reactivex.annotations.SchedulerSupport;
-import io.reactivex.internal.operators.observable.ObservableAmb;
-import io.reactivex.plugins.RxJavaPlugins;
+import com.wy.younger.plugins.rxjava.internal.operators.observable.ObservableAmb;
+import com.wy.younger.plugins.rxjava.plugins.RxJavaPlugins;
 
 /**
  * @package:com.wy.younger.plugins.rxjava
@@ -23,4 +23,12 @@ public abstract class Observable<T> implements ObservableSource<T> {
         return RxJavaPlugins.onAssembly(new ObservableAmb<T>(null, sources));
     }
 
+
+    protected abstract void subscribeActual(Observer<? super T> observer);
+
+
+    @Override
+    public void subscribe(Observer<? super T> observer) {
+
+    }
 }

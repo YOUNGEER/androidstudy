@@ -1,5 +1,8 @@
 package com.wy.younger.plugins.rxjava;
 
+
+import com.wy.younger.plugins.rxjava.annotations.NonNull;
+
 /**
  * @data on:2019/1/21 17:59
  * author:YOUNG
@@ -7,5 +10,5 @@ package com.wy.younger.plugins.rxjava;
  */
 public interface ObservableSource<T> {
 
-    void subscribe();
+    void subscribe(@NonNull Observer<? super T> observer);
 }

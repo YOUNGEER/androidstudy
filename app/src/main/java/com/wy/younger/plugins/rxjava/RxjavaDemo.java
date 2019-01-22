@@ -1,11 +1,13 @@
 package com.wy.younger.plugins.rxjava;
 
+import android.util.Log;
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
+import io.reactivex.functions.Predicate;
 import io.reactivex.schedulers.Schedulers;
 
 /**
@@ -28,7 +30,7 @@ public class RxjavaDemo {
                 emitter.onNext("1");
             }
         })
-                .observeOn(Schedulers.computation())
+                .observeOn(Schedulers.io())
                 .subscribeOn(Schedulers.computation())
                 .map(new Function<String, String>() {
 
@@ -46,5 +48,28 @@ public class RxjavaDemo {
 
         d.dispose();
 
+    }
+
+
+    private void method2() {
+        Observable.just(1).map(new Function<Integer, Integer>() {
+            @Override
+            public Integer apply(Integer integer) {
+                return Math.abs(integer);
+            }
+        }).filter(new Predicate<Integer>() {
+            @Override
+            public boolean test(Integer integer) throws Exception {
+                return true;
+            }
+        }).observeOn(Schedulers.io())
+                .subscribeOn(Schedulers.computation())
+                .subscribe(new Consumer<Integer>() {
+                    @Override
+                    public void accept(Integer integer) throws Exception {
+
+                        Log.i("gdsfafffffffffff", String.valueOf(integer));
+                    }
+                });
     }
 }
