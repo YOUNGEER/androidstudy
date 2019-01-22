@@ -23,6 +23,7 @@ public class RxjavaDemo {
      * 分析源码之前，我们先定义一下名词，RxJava 是基于观察者模式的，
      * 这里将被观察者叫做主题（Source），观察者叫做观察者（Observer）。
      */
+
     private void demo1() {
         Disposable d = Observable.create(new ObservableOnSubscribe<String>() {
             @Override
