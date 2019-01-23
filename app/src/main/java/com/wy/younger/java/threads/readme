@@ -32,4 +32,9 @@ yield可以直接用Thread类调用，yield让出CPU执行权给同等级的线�
 如果没有相同级别的线程在等待CPU的执行权，则该线程继续执行。
 
 
-chanpter:挂起 suspend    继续resume
+chapter3:挂起 suspend    继续resume   这是两个丢弃的方法，不建议使用  一般自己通过设置boolean类型的标志位判断
+
+chapter4：用户线程和守护线程    线程阻塞
+
+chapter5：volatile用法   volatile保证了不同线程间操作同一个对象，始终能获取到最新的数据，这是因为不同的线程为了保证可以快速
+      执行，一般变量都保存在cache中，volatile使得变量保存在主内存中，但是相对来讲  效率可能会有一定影响

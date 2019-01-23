@@ -6,7 +6,7 @@ package com.wy.younger.java.threads.chapter3
  *author:YOUNG
  *desc:TODO
  */
-class DeprecatedSuspendResume : Any(), Runnable {
+class DeprecatedSuspendResume : Runnable {
 
     //volatile关键字，表示该变量可能在被一个线程使用的同时，被另一个线程修改
     @Volatile
@@ -46,6 +46,26 @@ class DeprecatedSuspendResume : Any(), Runnable {
 
     fun stepTwo(value: Int) {
         secondVal = value
+    }
+
+}
+
+
+fun main(args: Array<String>) {
+    val deprecatedSuspendResume = DeprecatedSuspendResume()
+    val t = Thread(deprecatedSuspendResume)
+    t.start()
+
+    try {
+        Thread.sleep(2000)
+    } catch (e: Exception) {
+        for (i in 0..10) {
+            t.suspend()
+
+            System.out.println(deprecatedSuspendResume.areValuesEqual())
+
+            t.resume()
+        }
     }
 
 }
