@@ -43,6 +43,16 @@ public class RxjavaDemo {
         });
 
         /**
+         * 下级的Observable订阅了上级的Observer
+         * subscribe开始逐级回调subscribeActual方法
+         * create调用了自己的apply方法后，继续调用下级的onNext方法
+         *
+         *
+         *
+         *
+         *
+         *
+         *
          * 1.调用了observable2的subscribe方法，
          * 2.实质是调用了observable2的 subscribeActual(observer);方法
          * 3.调用了ObservableMap的subscribeActual方法
@@ -82,6 +92,14 @@ public class RxjavaDemo {
 
     /**
      * 重点分析下线程是如何进行切换的
+     * <p>
+     * <p>
+     * Scheduler类，子类包括ioScheduler，newthreadScheduler，computerScheduler等
+     * <p>
+     * 子类主要实现 work和scheduler方式，通过线程池进行线程的切换 ScheduledExecutorService
+     *
+     *
+     *
      */
     private void demo1() {
         Disposable d = Observable.create(new ObservableOnSubscribe<String>() {
