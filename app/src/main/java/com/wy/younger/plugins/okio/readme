@@ -1,0 +1,14 @@
+okio是okhttp的io实现库，相对java的繁琐的io，okio显得更加简洁，高效
+
+
+
+sink bufferedSink   输出
+source bufferedSoucer   输入
+
+segment:片段   byteString数组实现数据结构
+segmentPool：片段池
+
+buffer利用segment和segmentPool实现 复用，提高速度
+
+
+
