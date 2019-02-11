@@ -1,0 +1,39 @@
+https://zhuanlan.zhihu.com/p/35121326
+
+retrofit是一个基础AOP思想，对Restful Api注解进行动态代理的网络框架
+
+
+AOP:aspect oriented programming 面向切面编程
+在不影响主题逻辑的前提下，动态的插入逻辑，通过反射进行调用  解耦
+
+
+
+静态代理：静态代理实际上就是继承的思想，比如 interface  person   ，实现类  class student   ，class teacher
+调用的时候直接创建student和teacher对象，这样的方式就是静态代理
+
+动态代理就是利用了AOP的思想，通过对InvocationHandler的实现，通过反射技术，实现子类的创建调用
+通过proxy的newroxyInstance方法，动态生成代码
+
+1.
+初始化代码，主要是平台Android信息，参数校验，网络请求相关对象的生成
+Retrofit retrofit = new Retrofit.Builder()
+                       .baseUrl("https://api.github.com/")
+                       .build();
+
+
+2.
+生成接口实现类：
+GithubApiService githubService = retrofit.create(service)
+Call<ResponseBody> call = githubService.searchRepoInfo("changmu175");
+create方法用的是aop思想，动态代理实现
+
+
+主要是HttpServiceMethod类，通过对注解的解析，拼接成一个省略域名的URL
+
+
+Retrofit主要是在create方法中采用动态代理模式实现接口方法，
+这个过程构建了一个ServiceMethod对象，根据方法注解获取请求方式，
+参数类型和参数注解拼接请求的链接，当一切都准备好之后会把数据添
+加到Retrofit的RequestBuilder中。然后当我们主动发起网络请求的
+时候会调用okhttp发起网络请求，okhttp的配置包括请求方式，
+URL等在Retrofit的RequestBuilder的build()方法中实现，并发起真正的网络请求。
