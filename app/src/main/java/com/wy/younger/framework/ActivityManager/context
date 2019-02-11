@@ -1,0 +1,8 @@
+context：一般翻译为上下文，android四大组件除了broadcast，其他三个都是其实现类
+contextImpl和contextWrap是其直接实现类
+contextThemeWrap，service和application是contextwrap直接实现类
+activity是contextThemeWrap的直接实现子类
+
+
+context中定义了N多抽象方法
+contextWrap通过Context类型的mBase实现相关方法，mBase一般是由activity，service和application来实现
