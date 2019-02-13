@@ -1,0 +1,31 @@
+Handler：处理类
+
+
+创建对象的时候，就有了looper和messagequeue对象
+
+looper可以显示创建（其他线程），默认主线程会自动创建
+
+sendmessage：会将消息防到messagequeue中，在looper的loop方法中会调用msg.target.dispatch方法
+post：runnale会封装成message，然后调用sendmessage方法
+
+
+
+
+
+一个handler只能绑定一个looper，反之不成立
+
+
+
+问题:为什么handler在其他线程post的消息，通过looper的messagequeue后，
+就能 dispatch到主线程的 handler 的 handleMessage中呢
+
+https://www.zhihu.com/question/44329366
+最底层还是通过pipe实现的夸线程吧? 管道就是一个文件，在管道的两端，
+分别是两个打开文件文件描述符，这两个打开文件描述符都是对应同一个文件，
+其中一个是用来读的，别一个是用来写的，一般的使用方式就是，
+一个线程通过读文件描述符中来读管道的内容，当管道没有内容时，这个线程就会进入等待状态
+，而另外一个线程通过写文件描述符来向管道中写入内容，写入内容的时候，
+如果另一端正有线程正在等待管道中的内容，那么这个线程就会被唤醒。
+
+
+Handler底层的确是采用管道机制

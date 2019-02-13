@@ -1,0 +1,10 @@
+ActivityManager是android framework之一
+
+首先我们需要知道几个知识点
+1.android中，每个app都是对应一个系统进程
+2.普通的java程序入口是main方法，其实就是开启了一个进程，然后这个java进程就开启了一个主线程
+3.Android系统中有很多进程，AMS，PMS都是独立的进程，app都要和这些进程进行通信
+4.app的开始入口是ActivityThread的main方法
+
+
+ActivityThread：

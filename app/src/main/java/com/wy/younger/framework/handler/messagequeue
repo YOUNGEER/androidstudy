@@ -1,0 +1,10 @@
+messagequeue：消息队列
+
+依附于looper，他们是一一对应的关系
+
+
+MessageQueue的数据结构，是一个单向链表，Message对象有个
+next字段保存列表中的下一个，MessageQueue中的mMessages保存链表的第一个元素
+
+MessageQueue的初始化方法是一个native方法
+
