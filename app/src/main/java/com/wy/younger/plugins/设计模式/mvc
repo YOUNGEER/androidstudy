@@ -1,0 +1,27 @@
+Android中的MVC
+
+1.视图层（View）：一般采用XML文件进行界面的描述，使用的时候可以非常方便的引入。
+2.控制层（Controller）：Android的控制层通常是在Acitvity中实现。
+3.模型层（Model）：对数据库的操作、对网络等的操作都应该在Model里面处理，当然对业务计算等操作也是必须放在的该层的。
+
+首先，View发送命令到Controller，然后Controller处理完业务逻辑后让Model改变状态
+，最后由Model将新的数据发送到View，用户得到数据响应。
+
+
+
+MVP的定义
+
+MVC (Model-View-Presenter)：MVP其实是由MVC演变而来的，其中的M依然是指逻辑模型，
+V依然是指视图模型，而P（中间桥梁）则代替了C成为了逻辑控制器的角色。
+
+
+
+
+MVC和MVP到底有啥区别
+
+区别就在于MVP中View并不直接使用Model，它们之间的通信是通过Presenter
+(MVC中的Controller)来进行的，所有的交互都发生在Presenter内部，而在MVC中
+View会直接从Model中读取数据而不是通过 Controller。我们知道在MVC里，View
+是可以直接访问Model的。从而，View里会包含Model信息，不可避免的还要包括一些业务逻辑。
+ 在MVC模型里，更关注的Model的不变，而同时有多个对Model的不同显示，即View。所以，
+ 在MVC模型里，Model不依赖于View，但是View是依赖于Model的。
