@@ -1,11 +1,16 @@
 Android中的MVC
 
-1.视图层（View）：一般采用XML文件进行界面的描述，使用的时候可以非常方便的引入。
-2.控制层（Controller）：Android的控制层通常是在Acitvity中实现。
-3.模型层（Model）：对数据库的操作、对网络等的操作都应该在Model里面处理，当然对业务计算等操作也是必须放在的该层的。
+
+1.模型层（Model）：对数据库的操作、对网络等的操作都应该在Model里面处理，当然对业务计算等操作也是必须放在的该层的。
+2.视图层（View）：一般采用XML文件进行界面的描述，使用的时候可以非常方便的引入。
+3.控制层（Controller）：Android的控制层通常是在Acitvity中实现。M V的交流就是通过activity来实现的
+
+
 
 首先，View发送命令到Controller，然后Controller处理完业务逻辑后让Model改变状态
 ，最后由Model将新的数据发送到View，用户得到数据响应。
+
+Android中的MVC并不是一个标准的MVC模式，activity一般会有很多代码，显得非常的冗余
 
 
 
@@ -25,3 +30,12 @@ View会直接从Model中读取数据而不是通过 Controller。我们知道在
 是可以直接访问Model的。从而，View里会包含Model信息，不可避免的还要包括一些业务逻辑。
  在MVC模型里，更关注的Model的不变，而同时有多个对Model的不同显示，即View。所以，
  在MVC模型里，Model不依赖于View，但是View是依赖于Model的。
+
+
+model:数据操作，逻辑操作相关，一般定义一个interface model
+view:xml+activity  activity实现一个 interface view
+present：表现层  连接model和view，一般将model和view的实现类作为变量，present的方法更多是model的类似方法，提供回调再供view调用
+
+present作为activity的属性，new出该对象
+
+一般定义一个契约类contract来定义view和model的interface，减少类的个数
