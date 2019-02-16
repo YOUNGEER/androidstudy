@@ -1,0 +1,92 @@
+https://juejin.im/post/5c245f086fb9a049c043146a
+
+动画可以分为两类：Animation 和 Transition；
+其中 Animation 又可以再分为 View Animation 和 Property Animation
+
+目前主要使用属性动画
+
+
+Animator：AnimatorSet和ValueAnimator
+ValueAnimator：ObjectAnimtor和TimeAnimator
+
+1.ValueAnimtor功能比较强大，复杂的动画可以用
+
+通过addUpdateValue改变object的属性值，不断绘制，就形成了动画
+
+2.ValueAnimator和ObjectAnimator的区别在哪?
+
+1.ValueAnimator需要手动添加监听，手动获取ValueAnimator的数据，手动书写变更逻辑
+2.ObjectAnimator可以不用进行更新监听,核心在`setXxx`里进行，
+也就是每次更新时会自己走setXxx里的方法，这样方便在外部使用来动态改变属性
+3.ValueAnimator的灵活性要好，毕竟自己动手，可以脑洞大开，想怎么玩怎么玩
+4.ObjectAnimator针对有setXxx的属性进行动画，两者的侧重点不同
+5.总的来说ObjectAnimator向于应用(简洁，快速)，ValueAnimator偏向于操作(灵活，多变)
+
+
+
+3.TimeAnimator
+这个类总共代码100行，而且几乎一半都是注释
+它继承自ValueAnimator，可谓也是Animator家族的掌上明珠,但非常纯真与专注
+她想做的只有一件事：提供一条时间流(每个16或17ms回调一次方法)
+
+
+插值器，动画整体变换的速率
+
+AnimatorSet各种动画的集合
+
+
+
+
+五、Animator家族在xml中的使用：
+在res下创建：animator文件夹
+
+
+
+1.Animator标签
+
+直接用animator标签感觉也有点麻烦，这里看一下吧
+
+duration 播放的时长 setDuration()
+valueType 参数值类型 ofXXX
+valueFrom 初始值 ofXXX
+valueTo 结束值 ofXXX
+startOffset 延时 startDelay()
+repeatCount 重复次数 setRepeatCount()
+interpolator 插值器 setRepeatMode()
+
+<?xml version="1.0" encoding="utf-8"?>
+<animator
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:duration="2000"
+    android:repeatCount="2"
+    android:repeatMode="reverse"
+    android:startOffset="1000"
+    android:valueFrom="0dp"
+    android:valueType="floatType"
+    android:valueTo="200dp">
+</animator>
+
+2.set与objectAnimator标签
+
+objectAnimator多了一个propertyName属性，其余一致
+动画的集合
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android"
+     android:ordering="sequentially">
+    <objectAnimator
+        android:duration="1500"
+        android:propertyName="rotationY"
+        android:valueFrom="0"
+        android:valueTo="180"/>
+    <objectAnimator
+        android:duration="1500"
+        android:propertyName="alpha"
+        android:valueFrom="0.3f"
+        android:valueTo="1f"/>
+    <objectAnimator
+        android:duration="1500"
+        android:propertyName="translationX"
+        android:valueFrom="0"
+        android:valueTo="180dp"/>
+</set>
+

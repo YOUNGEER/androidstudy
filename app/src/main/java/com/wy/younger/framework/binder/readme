@@ -45,3 +45,23 @@ Binder实现原理
 
 
 Binder实现流程
+Client,Server,ServiceManager,Binder驱动
+
+
+1.首先，一个进程使用 BINDERSETCONTEXT_MGR 命令通过 Binder 驱动将自己注册成为 ServiceManager；
+
+2.Server通过驱动向ServiceManager注册binder实体，ServiceManager在每个进程中都有序号为0的实体，所以可以通信
+
+3.Client通过名字，在驱动的帮助下，在ServiceManager中获取实体binder，进行通信
+
+4.Client是通过获取一个proxy实现，借助binder驱动传递参数调用Server的方法的
+
+
+
+跨进程通讯的方式有哪些？
+1.四大组件间传递Bundle;
+2.使用文件共享方式，多进程读写一个相同的文件，获取文件内容进行交互；
+3.使用Messenger，一种轻量级的跨进程通讯方案，底层使用AIDL实现（实现比较简单，博主开始本文前也想了一下是否要说一下这个东西，最后还是觉得没有这个必要，Google一下就能解决的问题，就不啰嗦了）；
+4.使用AIDL(Android Interface Definition Language)，Android接口定义语言，用于定义跨进程通讯的接口；
+5.使用ContentProvider，常用于多进程共享数据，比如系统的相册，音乐等，我们也可以通过ContentProvider访问到；
+6.使用Socket传输数据。

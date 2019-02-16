@@ -1,0 +1,133 @@
+https://blog.csdn.net/coslay/article/details/38084343
+反射：
+在runtime期间，
+对于任意一个类，都能知道这个类的所有属性和方法；
+对于任何一个对象，都能够调用它的任何一个方法和属性；
+
+Class：普通类的类型，每个类都有一个Class对象，是通过vm构建出来的
+例如，String.class的类型是 Class<String>
+
+获取Cl获取class对象有三种方式：
+
+1.通过实例变量的getClass()方法。例如：
+Class c1 = new String("abc").getClass();
+
+2.通过Class类的静态方法——forName()来实现，例如：
+Class class =Class.forName(className);
+注意：当使用Class.forName()方法时，你必须提供完全限定类名。即类名要包括所有包名。
+例如，如果MyObject是位于包com.jenkov.myapp下,那么类的完全限定名称是com.jenkov.myapp.MyObject。
+如果在运行时类路径上找不到类，Class.forName()方法会抛出一个ClassNotFoundException。
+
+3.使用类字面常量或TYPE字段，例如：
+Class myObjectClass= MyObject.class；(类字面常量不仅可以应用于普通的类，
+也可以应用于接口、数组以及基本数据类型)，这种方式不仅更简单，而且更安全，
+因为它在编译时就会受到检查，并且根除了对forName方法的调用，
+所以也更高效，建议使用".class"的形式
+
+
+
+类：通过反射可以获取类的
+类名，修饰符（private，static等），包信息，父类，实现的接口，构造函数，方法，属性，注解
+
+1类名：
+从Class对象中可以获取两个不同的类名。完全限定类名(包括包名)可以使用getName()或getCanonicalName()方法获取,例如：
+
+Class aClass = MyObject.class;
+String className = aClass.getName();
+String className1 = aClass.getCanonicalName();
+如果想要获取不含包名的类名可以使用getSimpleName() 方法，如下:
+
+Class  aClass = MyObject.class;
+String simpleClassName = aClass.getSimpleName();
+
+2修饰符：
+使用Class对象可以获取一个类的修饰符.类的修饰符即关键字"public","private", "static"等. 如下：
+
+Class aClass = MyObject.class;
+int modifiers = aClass.getModifiers();
+修饰符被包装进一个int内，每一个修饰符都是一个标志位(置位或清零)。可以使用java.lang.reflect.Modifier类中的以下方法来检验修饰符:
+
+    Modifier.isAbstract(int modifiers)
+    Modifier.isFinal(int modifiers)
+    Modifier.isInterface(int modifiers)
+    Modifier.isNative(int modifiers)
+    Modifier.isPrivate(int modifiers)
+    Modifier.isProtected(int modifiers)
+    Modifier.isPublic(int modifiers)
+    Modifier.isStatic(int modifiers)
+    Modifier.isStrict(int modifiers)
+    Modifier.isSynchronized(int modifiers)
+    Modifier.isTransient(int modifiers)
+    Modifier.isVolatile(int modifiers)
+
+3包信息
+使用Class对象可以获取包信息，如下:
+
+Class aClass = MyObject.class;
+Package package = aClass.getPackage();
+String packageName = package.getname();
+
+从Package对象中你可以访问诸如名字等包信息。您还可以访问类路径上这个包位于
+JAR文件中Manifest这个文件中指定的信息。例如，你可以在Manifest文件中指定包的版本号。
+可以在java.lang.Package中了解更多包类信息。
+
+
+4父类
+通过Class对象可以获取类的父类，如下:
+
+Class  aClass = MyObject.class;
+Class superclass = aClass.getSuperclass();
+父类的Class对象和其它Class对象一样是一个Class对象，可以继续使用反射.
+
+5实现的接口
+通过给定的类可以获取这个类所实现的接口列表，如下:
+
+Class aClass = MyObject.class;
+Class[] interfaces = aClass.getInterfaces();
+一个类可以实现多个接口。因此返回一个Class数组。在Java反射机制中，接口也由Class对象表示。
+
+注意:只有给定类声明实现的接口才会返回。例如，如果类A的父类B实现了一个接口C，
+但类A并没有声明它也实现了C，那么C不会被返回到数组中。即使类A实际上实现了接口C，因为它的父类B实现了C。
+
+为了得到一个给定的类实现接口的完整列表，需要递归访问类和其超类。
+
+6构造函数
+使用Class对象可以获取类的构造函数，如下：
+
+Class aClass = MyObject.class;
+Constructor[] constructors = aClass.getConstructors();
+关于构造函数更详细信息参见 构造函数这节。
+
+
+7方法
+使用Class对象可以获取类的方法，如下:
+
+Class aClass = MyObject.class;
+Method[] methods = aClass.getMethods();
+
+
+8字段
+使用Class对象可以获取类的字段(成员变量)，如下:
+
+Class aClass = MyObject.class;
+Field[] fields = aClass.getFields();
+
+
+9注解
+使用Class对象可以获取类的注解，如下:
+
+Class aClass = MyObject.class;
+Annotation[] annotations = aClass.getAnnotations();
+
+
+
+
+
+
+
+
+
+
+
+
+

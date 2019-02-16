@@ -1,0 +1,14 @@
+注解：只是做一个标记，不会对代码有什么影响，真正起作用的是后续的处理
+
+注解用@interface表示
+
+java一般有四个用来元注解，也就是注解自定义的注解
+
+
+@Docdument 注解是否将包含在Javadoc稳定中
+@Target 注解用于在什么地方，默认所有位置都可以
+可以分为 类，属性，方法等
+@Retention 什么时候使用该注解，有三种选择，默认为CLASS
+source class runtime
+@Inherit 是否允许子类继承该注解，默认false
+
