@@ -104,3 +104,13 @@ chapter7：死锁   两个锁之间互相持有对方的引用，都在等待释
 chapter8：Executor框架
 
 
+线程池：
+
+
+https://juejin.im/entry/593109e72f301e005830cd76
+
+
+1.
+interface executor  {
+execute()
+}
