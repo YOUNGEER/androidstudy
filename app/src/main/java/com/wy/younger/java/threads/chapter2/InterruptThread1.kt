@@ -11,6 +11,7 @@ class InterruptThread1 : Runnable {
 
     override fun run() {
 
+
         println("in run ---run" + System.currentTimeMillis())
 
         try {

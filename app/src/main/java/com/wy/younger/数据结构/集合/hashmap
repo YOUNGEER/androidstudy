@@ -26,7 +26,7 @@ bucket里的第一个节点，直接命中；
 
 HashMap 线程非安全的
 
-ConcurrentHashMap是线程安全的
+ConcurrentHashMap是线程安全的,hashtable也是线程安全的，但是效率会比较低
 
 
 
