@@ -75,6 +75,6 @@ git commit --amend  //amend" 是「修正」的意思。在提交时，如果加
 git stash:作目录的改动就被清空了，所有改动都被存了起来
 git stash -u：保存修改的内容，即使没有add
 
-
+git stash pop:修改的内容又出来了
 
 
