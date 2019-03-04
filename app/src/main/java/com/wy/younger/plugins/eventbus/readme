@@ -3,7 +3,7 @@ eventbus:订阅，观察者模式
 
 EventBus对象，post方法
 
-
+EventBus只支持同一个进程内的通信
 
 
 
