@@ -1,0 +1,79 @@
+
+
+ git log
+ git log --p 看详细log日志
+ git log --stat 改动内容
+ git show
+ git status
+ git add
+ git add . 全部文件
+ git commit
+ git push
+ git pull
+
+
+
+ git clone https dirname
+
+
+ header:当前引用的指针
+
+
+
+ branch:分支
+
+ git branch branch1     创建分支branch1
+ git checkout branch1   切换到分支branch1
+
+
+ git checkout -b branch1  创建分支branch1并切换上
+
+
+ git branch -d branch1 删除分支branch1 （当前head引用的branch无法删除）
+
+
+ git push:只会上传本地master的分支到远程
+ git push origin branch1  上传branch1分支到远程，远程的header永远会指向默认master分支
+
+ 如果此时header在master上
+ git merge branch1:表示分支branch1合并到master路径上
+
+ git merge --abort:如果merge的时候出现了冲突，此命令是将合并冲突丢弃
+
+
+
+ 多人开发的工作流：
+ 1.功能开发用branch
+ 2.开发完成后，branch合并
+
+
+ 一般步骤：
+ 1. git checkout -b books//创建分支books并切换
+
+ 2. git push origin books//上传到远程
+
+ 3.git checkout master //切换到master，更新，本地合并
+   git pull
+   git merge books
+
+ 4.git push
+   git branch -d books
+
+   git push origin -d books //合并的push到远程，并删除了远程分支
+
+
+
+git diff --staged  //比对暂存区和上一条提交
+git diff HEAD //比对工作目录和上一条提交
+
+
+git add 笑声.txt
+git commit --amend  //amend" 是「修正」的意思。在提交时，如果加上 --amend 参数，
+                       Git 不会在当前 commit 上增加 commit，而是会把当前 commit 里的内容和暂存区
+                       （stageing area）里的内容合并起来后创建一个新的 commit
+
+git stash:作目录的改动就被清空了，所有改动都被存了起来
+git stash -u：保存修改的内容，即使没有add
+
+git stash pop:修改的内容又出来了
+

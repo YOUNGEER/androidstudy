@@ -4,6 +4,7 @@ HashMap：
 键值对，字典，map的子类
 
 
+当系统开始初始化 HashMap 时，系统会创建一个长度为 capacity 的 Entry 数组，这个数组里可以存储元素的位置被称为“桶（bucket）”
 
 put函数大致的思路为：
 
@@ -26,7 +27,7 @@ bucket里的第一个节点，直接命中；
 
 HashMap 线程非安全的
 
-ConcurrentHashMap是线程安全的
+ConcurrentHashMap是线程安全的,hashtable也是线程安全的，但是效率会比较低
 
 
 
