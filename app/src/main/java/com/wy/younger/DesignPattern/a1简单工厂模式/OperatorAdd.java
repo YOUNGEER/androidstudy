@@ -1,4 +1,4 @@
-package com.wy.younger.DesignPattern.简单工厂模式;
+package com.wy.younger.DesignPattern.a1简单工厂模式;
 
 /**
  * @package:com.wy.younger.DesignPattern.简单工厂模式
@@ -6,10 +6,10 @@ package com.wy.younger.DesignPattern.简单工厂模式;
  * author:YOUNG
  * desc:TODO
  */
-public class OperatorMul extends Operator {
+public class OperatorAdd extends Operator {
     @Override
     public Double result() {
 
-        return mA * mB;
+        return mA + mB;
     }
 }

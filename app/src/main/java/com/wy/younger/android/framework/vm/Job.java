@@ -1,4 +1,4 @@
-package com.wy.younger.framework.vm;
+package com.wy.younger.android.framework.vm;
 
 /**
  * @package:com.wy.younger.framework.vm

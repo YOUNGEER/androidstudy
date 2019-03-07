@@ -1,4 +1,4 @@
-package com.wy.younger.DesignPattern.简单工厂模式
+package com.wy.younger.DesignPattern.a1简单工厂模式
 
 /**
  *@package:com.wy.younger.DesignPattern.简单工厂模式

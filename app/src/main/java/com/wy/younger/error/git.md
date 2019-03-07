@@ -1,0 +1,1 @@
+- Successfully created project 'idai2019' on Gitee, but initial push failed: Could not read from remote repository.

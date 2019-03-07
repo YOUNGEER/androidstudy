@@ -1,4 +1,4 @@
-package com.wy.younger.DesignPattern.策略模式
+package com.wy.younger.DesignPattern.a2策略模式
 
 /**
  *@package:com.wy.younger.DesignPattern.策略模式

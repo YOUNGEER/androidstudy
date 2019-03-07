@@ -1,4 +1,4 @@
-package com.wy.younger.DesignPattern.策略模式;
+package com.wy.younger.DesignPattern.a2策略模式;
 
 /**
  * @package:com.wy.younger.DesignPattern.策略模式
@@ -6,7 +6,7 @@ package com.wy.younger.DesignPattern.策略模式;
  * author:YOUNG
  * desc:TODO
  */
-public class ConcertStrategyC extends Strategy {
+public class ConcertStrategyA extends Strategy {
     @Override
     public void AlgorithmInterface() {
 

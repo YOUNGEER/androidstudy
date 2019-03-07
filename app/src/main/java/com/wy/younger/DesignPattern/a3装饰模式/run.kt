@@ -1,4 +1,4 @@
-package com.wy.younger.DesignPattern.装饰模式
+package com.wy.younger.DesignPattern.a3装饰模式
 
 /**
  *@package:com.wy.younger.DesignPattern.装饰模式

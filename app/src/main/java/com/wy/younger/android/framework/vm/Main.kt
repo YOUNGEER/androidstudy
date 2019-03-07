@@ -1,9 +1,9 @@
-package com.wy.younger.framework.vm
+package com.wy.younger.android.framework.vm
 
 import java.lang.reflect.InvocationTargetException
 
 /**
- *@package:com.wy.younger.framework.vm
+ *@package:com.wy.younger.android.framework.vm
  *@data on:2019/2/13 10:20
  *author:YOUNG
  *desc:TODO
@@ -25,7 +25,7 @@ fun main() {
     val diskClassLoader =
         DiskClassLoader("D:\\project\\younger\\app\\src\\main\\java\\com\\wy\\younger\\framework\\vm")//1
     try {
-        val c = diskClassLoader.loadClass("com.wy.younger.framework.vm.Job")//2
+        val c = diskClassLoader.loadClass("com.wy.younger.android.framework.vm.Job")//2
         if (c != null) {
             try {
                 val obj = c.newInstance()
